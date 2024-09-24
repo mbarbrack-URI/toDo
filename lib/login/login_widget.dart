@@ -83,10 +83,10 @@ class _LoginWidgetState extends State<LoginWidget>
                       alignment: const AlignmentDirectional(0.0, -1.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          'https://picsum.photos/seed/249/600',
-                          width: 120.0,
-                          height: 56.0,
+                        child: Image.asset(
+                          'assets/images/Screenshot_2024-09-23_230745.png',
+                          width: 248.0,
+                          height: 81.0,
                           fit: BoxFit.cover,
                           alignment: const Alignment(-1.0, -1.0),
                         ),
