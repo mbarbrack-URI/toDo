@@ -1,5 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/add_task_copy_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -713,7 +715,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 return;
                               }
 
-                              context.goNamedAuth('task', context.mounted);
+                              context.goNamedAuth('login', context.mounted);
                             },
                             text: 'sign up',
                             options: FFButtonOptions(
@@ -745,6 +747,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                   !_model.formKey2.currentState!.validate()) {
                                 return;
                               }
+                              _model.apiResult7bw =
+                                  await SendEmailToUserCall.call(
+                                to: _model.signupTextController.text,
+                                subject: 'test',
+                                text: 'test',
+                              );
+
                               GoRouter.of(context).prepareAuthEvent();
                               if (_model.signuppasswordTextController.text !=
                                   _model.confirmSignupTextController.text) {
@@ -778,8 +787,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                     createdTime: getCurrentTimestamp,
                                   ));
 
-                              context.goNamedAuth(
-                                  'onboarding', context.mounted);
+                              await showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                enableDrag: false,
+                                context: context,
+                                builder: (context) {
+                                  return GestureDetector(
+                                    onTap: () =>
+                                        FocusScope.of(context).unfocus(),
+                                    child: Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: const AddTaskCopyWidget(),
+                                    ),
+                                  );
+                                },
+                              ).then((value) => safeSetState(() {}));
+
+                              safeSetState(() {});
                             },
                             text: 'sign up',
                             options: FFButtonOptions(
